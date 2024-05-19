@@ -1,1 +1,11 @@
+# dataset related files
+*.png
+/dataset
+
+# python
 .venv
+.ipynb_checkpoints
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
