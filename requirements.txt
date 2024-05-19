@@ -40,6 +40,7 @@ tornado==6.4
 traitlets==5.14.3
 trio==0.25.0
 trio-websocket==0.11.1
+types-selenium==3.141.9
 typing_extensions==4.11.0
 urllib3==2.2.1
 wcwidth==0.2.13
