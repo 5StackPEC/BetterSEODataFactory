@@ -1,0 +1,20 @@
+{
+  "lighthouseReports": [
+    {
+      "id": 0,
+      "url": "https://pokemon.com/",
+      "performance": 51.0,
+      "accessibility": 72.0,
+      "best-practices": 56.99999999999999,
+      "seo": 67.0
+    },
+    {
+      "id": 1,
+      "url": "https://viz.com/",
+      "performance": 46.0,
+      "accessibility": 83.0,
+      "best-practices": 56.99999999999999,
+      "seo": 85.0
+    }
+  ]
+}
