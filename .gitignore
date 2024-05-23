@@ -1,6 +1,11 @@
 # dataset related files
-*.png
 /dataset
+*.png
+*.jpg
+*.jpeg
+*.csv
+*.json
+
 
 # python
 .venv
