@@ -12,11 +12,15 @@ def get_site_name(url):
     return domain_name
 
 
-def write_json_annotation(annotation):
-    with open("./dataset/annotations/annotations.json", "w") as json_file:
-        json.dump(annotation, json_file)
-
-
 def take_screenshot(driver: WebDriver, url):
     driver.fullscreen_window()
     driver.save_screenshot(f"./dataset/images/{web_utils.get_site_name(url)}.png")
+
+
+def load_js_script_to_driver(driver: WebDriver, js_script_path="./js/boundingBoxes.js"):
+    with open(js_script_path, "r") as file:
+        js_code = file.read()
+
+    driver.execute_script(js_code)
+
+    return driver
