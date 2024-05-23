@@ -1,5 +1,4 @@
 from urllib.parse import urlparse
-import json
 from utils import web_utils
 import tldextract
 
@@ -22,4 +21,3 @@ def take_screenshot_of_window(driver: WebDriver, url):
     # The url is only needed for the file name, it does not actually uses it!
     driver.fullscreen_window()
     driver.save_screenshot(f"./dataset/images/{web_utils.get_site_name(url)}.png")
-    driver.maximize_window()

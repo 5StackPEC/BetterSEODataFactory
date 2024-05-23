@@ -32,3 +32,12 @@ def generate_bounding_boxes_of_tags(driver: WebDriver, target_tags):
         bounding_boxes_dict[tag] = get_bounding_boxes_of_tag_class(driver, tag)
 
     return bounding_boxes_dict
+
+
+def load_js_script_to_driver(driver: WebDriver, js_script_path="../js/boundingBoxes.js"):
+    with open(js_script_path, "r") as file:
+        js_code = file.read()
+
+    driver.execute_script(js_code)
+
+    return driver

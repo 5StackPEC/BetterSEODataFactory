@@ -39,10 +39,11 @@ def is_in_viewport(driver: WebDriver, element: WebElement):
     driver.execute_script(is_in_viewport_js, is_in_viewport_js)
 
 
-def is_element_size_valid(element: WebElement):
+def is_element_size_valid(element: WebElement, verbose = False):
     size = element.size
     if size["width"] == 0 or size["height"] == 0:
-        print(f"Invalid {element.tag_name} size found.")
+        if verbose:
+            print(f"Invalid {element.tag_name} size found.") 
         return False
     return True
 
@@ -87,3 +88,7 @@ def draw_annotations(driver: WebDriver, target_tags):
 
             paint_border(element, borderColor=color, backgroundColor=transparent_color)
             paint_corner_labels(element, color)
+
+
+def hide_scrollbar(driver: WebDriver):
+    driver.execute_script("document.body.style.overflow = 'hidden';")

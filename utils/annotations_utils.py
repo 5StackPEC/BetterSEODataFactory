@@ -1,9 +1,12 @@
-from utils import web_utils
+from utils import web_utils, webscraping_utils, lighthouse_utils
 import json
 import csv
 import pandas as pd
 import os
 from utils import const
+
+# types
+from selenium.webdriver.remote.webdriver import WebDriver
 
 
 def generate_annotation(url, lighthouse_score, bounding_boxes_dict):
@@ -40,6 +43,21 @@ def make_annotation_on_csv_file(
     with open(csv_file_path, "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(annotation_df.values.tolist()[0])
+
+
+def generate_annotation_from_url(driver: WebDriver, url):
+    driver.get(url)
+    # load_js_script_to_driver(driver) # not needed atm
+
+    # Get the bounding boxes of all the elements from the target tags
+    bounding_boxes_dict = webscraping_utils.generate_bounding_boxes_of_tags(
+        driver, const.TARGET_TAGS
+    )
+
+    lighthouse_score = lighthouse_utils.get_lighhouse_score(url)
+    annotation = generate_annotation(url, lighthouse_score, bounding_boxes_dict)
+
+    return annotation
 
 
 # Depracated for now
