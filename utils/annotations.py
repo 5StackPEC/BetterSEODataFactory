@@ -1,16 +1,16 @@
-from utils import web_utils, webscraping_utils, lighthouse_utils
+from utils import lighthouse, web, webscraping
 import json
 import csv
 import pandas as pd
 import os
-from utils import const
+from utils import consts
 
 # types
 from selenium.webdriver.remote.webdriver import WebDriver
 
 
 def generate_annotation(url, lighthouse_score, bounding_boxes_dict):
-    site_name = web_utils.get_site_name(url)
+    site_name = web.get_site_name(url)
     annotation = {
         "id": site_name,
         "image": f"{site_name}.png",
@@ -22,7 +22,7 @@ def generate_annotation(url, lighthouse_score, bounding_boxes_dict):
 
 
 def generate_csv_annotation_header(
-    header_list=const.CSV_HEADERS,
+    header_list=consts.CSV_HEADERS,
     csv_file_path="./dataset/annotations/annotations.csv",
 ):
     df = pd.DataFrame(columns=header_list)
@@ -38,7 +38,7 @@ def make_annotation_on_csv_file(
 
     # MAKE SURE IT FOLLOWS THE PREVIOUSLY DEFINED STRUCTURE!!!!
     # [id: string, image: string, score: int, tags: dictionary]
-    annotation_df = pd.DataFrame([annotation_dict], columns=const.CSV_HEADERS)
+    annotation_df = pd.DataFrame([annotation_dict], columns=consts.CSV_HEADERS)
 
     with open(csv_file_path, "a", newline="") as file:
         writer = csv.writer(file)
@@ -50,11 +50,11 @@ def generate_annotation_from_url(driver: WebDriver, url):
     # load_js_script_to_driver(driver) # not needed atm
 
     # Get the bounding boxes of all the elements from the target tags
-    bounding_boxes_dict = webscraping_utils.generate_bounding_boxes_of_tags(
-        driver, const.TARGET_TAGS
+    bounding_boxes_dict = webscraping.generate_bounding_boxes_of_tags(
+        driver, consts.TARGET_TAGS
     )
 
-    lighthouse_score = lighthouse_utils.get_lighhouse_score(url)
+    lighthouse_score = lighthouse.get_lighhouse_score(url)
     annotation = generate_annotation(url, lighthouse_score, bounding_boxes_dict)
 
     return annotation

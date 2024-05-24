@@ -1,5 +1,5 @@
 from urllib.parse import urlparse
-from utils import web_utils
+from utils import web
 import tldextract
 
 # types
@@ -20,4 +20,4 @@ def get_site_name(url):
 def take_screenshot_of_window(driver: WebDriver, url):
     # The url is only needed for the file name, it does not actually uses it!
     driver.fullscreen_window()
-    driver.save_screenshot(f"./dataset/images/{web_utils.get_site_name(url)}.png")
+    driver.save_screenshot(f"./dataset/images/{web.get_site_name(url)}.png")

@@ -1,4 +1,4 @@
-from utils import visual_utils
+from utils import visual
 from selenium.webdriver.common.by import By
 
 # types
@@ -8,7 +8,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 def get_element_bounding_box(element: WebElement):
     size = element.size
-    if visual_utils.is_element_size_valid(element) == False:
+    if visual.is_element_size_valid(element) == False:
         return
 
     location = element.location

@@ -1,5 +1,5 @@
 import random
-from utils import visual_utils
+from utils import visual
 from tqdm import tqdm
 from selenium.webdriver.common.by import By
 
@@ -78,8 +78,8 @@ def paint_corner_labels(driver: WebDriver, element: WebElement, color="tomato)")
 def draw_annotations(driver: WebDriver, target_tags):
     for tag in target_tags:
         elements = driver.find_elements(By.TAG_NAME, tag)
-        color = visual_utils.get_random_rgb_string()
-        transparent_color = visual_utils.generate_transparent_color_from_rgb_string(
+        color = visual.get_random_rgb_string()
+        transparent_color = visual.generate_transparent_color_from_rgb_string(
             color
         )
         for element in tqdm(elements, desc=f"Processing {tag} tags"):
