@@ -1,19 +1,10 @@
 import os
 import json
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from lighthouse_utils import lighthouse
+from . import lighthouse
 
 
 def generate_report(url):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Run Chrome in headless mode
-    driver = webdriver.Chrome(options=chrome_options)
-
-    driver.get(url)
     report = lighthouse.run_lighthouse(url)
-
-    driver.quit()
 
     return report
 
