@@ -1,4 +1,5 @@
-from utils import lighthouse, web, webscraping
+from utils import web, webscraping
+from Lighthouse.lighthouse_utils import reports
 import json
 import csv
 import pandas as pd
@@ -54,15 +55,14 @@ def generate_annotation_from_url(driver: WebDriver, url):
         driver, consts.TARGET_TAGS
     )
 
-    lighthouse_score = lighthouse.get_lighhouse_score(url)
+    full_lighthouse_score = reports.get_full_lighthouse_report(url)
+    lighthouse_score = reports.get_seo_from_full_report(full_lighthouse_score)
     annotation = generate_annotation(url, lighthouse_score, bounding_boxes_dict)
 
     return annotation
 
 
 # Depracated for now
-
-
 def write_json_annotation(
     annotation, json_path="./dataset/annotations/annotations.json"
 ):

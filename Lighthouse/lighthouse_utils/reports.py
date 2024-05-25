@@ -3,13 +3,29 @@ import json
 from . import lighthouse
 
 
-def generate_report(url):
+def get_important_scores(full_report, report_id, url):
+    important_scores = {
+        "id": report_id,
+        "url": url,
+        "performance": full_report["categories"]["performance"]["score"] * 100,
+        "accessibility": full_report["categories"]["accessibility"]["score"] * 100,
+        "best-practices": full_report["categories"]["best-practices"]["score"] * 100,
+        "seo": full_report["categories"]["seo"]["score"] * 100,
+    }
+
+    return important_scores
+
+
+def get_seo_from_full_report(full_report):
+    return full_report["categories"]["best-practices"]["score"] * 100
+
+def get_full_lighthouse_report(url):
     report = lighthouse.run_lighthouse(url)
 
     return report
 
 
-def save_report(report, filename, url, report_id):
+def save_report_on_file(report, filename, url, report_id):
     if report is not None:
         important_scores = {
             "id": report_id,
@@ -51,6 +67,6 @@ def thread_report(csvreader):
     for report_id, row in enumerate(csvreader):
         url = row[0]
         print(url)
-        report = generate_report(url)
+        report = get_full_lighthouse_report(url)
         # filename = f"lighthouse_report_{url.replace('https://', '').replace('/', '_')}.json"
-        save_report(report, "lighthouse_report.json", url, report_id)
+        save_report_on_file(report, "lighthouse_report.json", url, report_id)

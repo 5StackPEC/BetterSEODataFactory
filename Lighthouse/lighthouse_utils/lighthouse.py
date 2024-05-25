@@ -3,13 +3,14 @@ import subprocess
 
 
 def run_lighthouse(url):
-    cmd = f"npx lighthouse {url} --output=json"
+    cmd = f"npx lighthouse {url} --output=json --quiet"
     result = subprocess.run(
         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
 
     error_message_preffix = f"Error running Lighthouse command for {url}:"
     if result.returncode != 0:
+        # TODO: Append to failed urls new dataset for a second try
         if result.returncode == None:
             print(f"{error_message_preffix} no error code was generated")
         else:

@@ -1,13 +1,16 @@
-from lighthouse_utils import reports
+from . import reports
 import csv
+
 
 def process_chunk(chunk, start_id):
     for report_id, row in enumerate(chunk):
         url = row[0]
         print(url, "\n")
         try:
-            report = reports.generate_report(url)
-            reports.save_report(report, "lighthouse_report.json", url, start_id + report_id)
+            report = reports.get_full_lighthouse_report(url)
+            reports.save_report_on_file(
+                report, "lighthouse_report.json", url, start_id + report_id
+            )
         except Exception as e:
             print(
                 "Something went wrong while generating the report"

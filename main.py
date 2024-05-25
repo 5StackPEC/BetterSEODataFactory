@@ -1,9 +1,9 @@
 from utils import annotations, selenium, visual, web
 
-
 URLS = [
     "https://vercel.com",
-    "invalidurl" "https://www.primevideo.com/",
+    "invalidurl",
+    "https://www.primevideo.com/",
     "https://www.netflix.com/",
     "https://www.nytimes.com/",
 ]
@@ -25,6 +25,6 @@ if __name__ == "__main__":
                 # Write just after everything else ran successfully
                 annotations.make_annotation_on_csv_file(annotation)
             except:
-                print(f"ERROR ON URL: {url}")
+                print(f"ERROR ON WEBSITE: {url}")
     finally:
         driver.quit()
