@@ -3,7 +3,7 @@ from . import reports
 from utils import annotations, visual, web
 
 
-def process_chunk(chunk, start_id, driver, existing_urls_in_dataset):
+def process_chunk(chunk, start_id, driver, existing_urls_in_dataset, failed_urls):
     for report_id, url in enumerate(chunk):
         url = url[0]
         site_name = web.get_site_name(url)
@@ -23,6 +23,7 @@ def process_chunk(chunk, start_id, driver, existing_urls_in_dataset):
             annotations.make_annotation_on_csv_file(annotation)
         except Exception as e:
             print(f"ERROR ON WEBSITE: {url}")
+            failed_urls.add(url)
             # print(e)
         print("\n")
 

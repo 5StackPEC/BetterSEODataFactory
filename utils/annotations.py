@@ -8,6 +8,7 @@ from utils import consts
 
 # types
 from selenium.webdriver.remote.webdriver import WebDriver
+from typing import Set
 
 
 def generate_annotation(url, lighthouse_score, bounding_boxes_dict):
@@ -64,6 +65,16 @@ def generate_annotation_from_url(driver: WebDriver, url):
     annotation = generate_annotation(url, lighthouse_score, bounding_boxes_dict)
 
     return annotation
+
+
+def save_failed_urls_set(
+    failed_urls_set: Set[str], output_path="./dataset/annotations/failed_urls.csv"
+):
+    failed_urls_list = list(failed_urls_set)
+    with open(output_path, mode="w", newline="") as file:
+        writer = csv.writer(file)
+        for url in failed_urls_list:
+            writer.writerow([url])
 
 
 # Depracated for now
