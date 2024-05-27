@@ -12,7 +12,7 @@ if __name__ == "__main__":
         start_id = 0
         for chunk in paralelization.chunked_csv_reader(file_path, chunk_size):
             futures.append(
-                executor.submit(paralelization.process_chunk, chunk, start_id)
+                executor.submit(paralelization.process_chunk_lighthouse, chunk, start_id)
             )
             start_id += len(chunk)
 

@@ -1,5 +1,5 @@
-from utils import visual
 from selenium.webdriver.common.by import By
+from utils import visual, web
 
 # types
 from selenium.webdriver.remote.webelement import WebElement
@@ -26,16 +26,19 @@ def get_bounding_boxes_of_tag_class(driver: WebDriver, tag_name):
     return elements_bounding_boxes
 
 
-def generate_bounding_boxes_of_tags(driver: WebDriver, target_tags):
-    print("\tGetting bounding boxes")
+def generate_bounding_boxes_of_tags(driver: WebDriver, target_tags, url):
+    site_name = web.get_site_name(url)
+    print(f"{site_name}: getting bounding boxes")
     bounding_boxes_dict = {}
     for tag in target_tags:
         bounding_boxes_dict[tag] = get_bounding_boxes_of_tag_class(driver, tag)
-    print("Bounding boxes done")
+    print(f"{site_name}: bounding boxes done")
     return bounding_boxes_dict
 
 
-def load_js_script_to_driver(driver: WebDriver, js_script_path="../js/boundingBoxes.js"):
+def load_js_script_to_driver(
+    driver: WebDriver, js_script_path="../js/boundingBoxes.js"
+):
     with open(js_script_path, "r") as file:
         js_code = file.read()
 

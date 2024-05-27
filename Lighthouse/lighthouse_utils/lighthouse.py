@@ -1,9 +1,11 @@
 import json
 import subprocess
+from utils import web
 
 
 def run_lighthouse(url):
-    print("\tRunning Lighthouse")
+    site_name = web.get_site_name(url)
+    print(f"{site_name}: Running Lighthouse")
     cmd = f"npx lighthouse {url} --output=json --quiet"
     result = subprocess.run(
         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -19,7 +21,7 @@ def run_lighthouse(url):
         return None
     else:
         try:
-            print("\tLighthouse completed")
+            print(f"{site_name}: Lighthouse completed")
             return json.loads(result.stdout)
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON for {url}: {e}")

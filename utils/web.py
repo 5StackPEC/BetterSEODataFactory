@@ -19,6 +19,7 @@ def get_site_name(url):
 
 def take_screenshot_of_window(driver: WebDriver, url):
     # The url is only needed for the file name, it does not actually uses it!
-    print("\tTaking screenshot")
+    site_name = get_site_name(url)
+    print(f"{site_name}: Taking screenshot")
     driver.fullscreen_window()
     driver.save_screenshot(f"./dataset/images/{web.get_site_name(url)}.png")

@@ -1,6 +1,7 @@
 import os
 import json
 from . import lighthouse
+from utils import web
 
 
 def get_important_scores(full_report, report_id, url):
@@ -19,9 +20,11 @@ def get_important_scores(full_report, report_id, url):
 def get_seo_from_full_report(full_report):
     return full_report["categories"]["best-practices"]["score"] * 100
 
+
 def get_full_lighthouse_report(url):
+    site_name = web.get_site_name(url)
+
     report = lighthouse.run_lighthouse(url)
-    print("Lighthouse done")
     return report
 
 

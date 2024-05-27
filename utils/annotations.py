@@ -53,7 +53,7 @@ def generate_annotation_from_url(driver: WebDriver, url):
 
     # Get the bounding boxes of all the elements from the target tags
     bounding_boxes_dict = webscraping.generate_bounding_boxes_of_tags(
-        driver, consts.TARGET_TAGS
+        driver, consts.TARGET_TAGS, url
     )
 
     # Process Lighthouse service
