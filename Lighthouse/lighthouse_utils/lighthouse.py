@@ -3,6 +3,7 @@ import subprocess
 
 
 def run_lighthouse(url):
+    print("\tRunning Lighthouse")
     cmd = f"npx lighthouse {url} --output=json --quiet"
     result = subprocess.run(
         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -18,6 +19,7 @@ def run_lighthouse(url):
         return None
     else:
         try:
+            print("\tLighthouse completed")
             return json.loads(result.stdout)
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON for {url}: {e}")

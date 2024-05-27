@@ -21,7 +21,7 @@ def get_seo_from_full_report(full_report):
 
 def get_full_lighthouse_report(url):
     report = lighthouse.run_lighthouse(url)
-
+    print("Lighthouse done")
     return report
 
 
