@@ -27,10 +27,11 @@ def get_bounding_boxes_of_tag_class(driver: WebDriver, tag_name):
 
 
 def generate_bounding_boxes_of_tags(driver: WebDriver, target_tags):
+    print("\tGetting bounding boxes")
     bounding_boxes_dict = {}
     for tag in target_tags:
         bounding_boxes_dict[tag] = get_bounding_boxes_of_tag_class(driver, tag)
-
+    print("Bounding boxes done")
     return bounding_boxes_dict
 
 

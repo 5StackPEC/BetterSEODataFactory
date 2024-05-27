@@ -15,6 +15,7 @@ def generate_annotation(url, lighthouse_score, bounding_boxes_dict):
     annotation = {
         "id": site_name,
         "image": f"{site_name}.png",
+        "fullURL": url,
         "score": lighthouse_score,
         "tags": bounding_boxes_dict,
     }
@@ -38,7 +39,7 @@ def make_annotation_on_csv_file(
         generate_csv_annotation_header(csv_file_path=csv_file_path)
 
     # MAKE SURE IT FOLLOWS THE PREVIOUSLY DEFINED STRUCTURE!!!!
-    # [id: string, image: string, score: int, tags: dictionary]
+    # [id: string, image: string, fullURL:string, score: int, tags: dictionary]
     annotation_df = pd.DataFrame([annotation_dict], columns=consts.CSV_HEADERS)
 
     with open(csv_file_path, "a", newline="") as file:
@@ -55,8 +56,11 @@ def generate_annotation_from_url(driver: WebDriver, url):
         driver, consts.TARGET_TAGS
     )
 
+    # Process Lighthouse service
     full_lighthouse_score = reports.get_full_lighthouse_report(url)
     lighthouse_score = reports.get_seo_from_full_report(full_lighthouse_score)
+
+    # Generate annotation dictionary
     annotation = generate_annotation(url, lighthouse_score, bounding_boxes_dict)
 
     return annotation
